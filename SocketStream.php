@@ -33,8 +33,7 @@ class SocketStream {
     if (!is_null($port) && is_int($port))
       $this->port = (int)$port;
 
-    if (!is_null($this->_handle))
-      $this->close();
+    $this->close();
 
     try {
 
@@ -99,7 +98,7 @@ class SocketStream {
 
   }
 
-  public function receive(){
+  public function receive($data=null){
 
     $this->_lastError = null;
 
@@ -112,8 +111,12 @@ class SocketStream {
 
     try {
 
-      while (!is_null($this->_handle) && !feof($this->_handle))
-        $buffer[] = fgets($this->_handle, 4096);
+      while (!feof($this->_handle)){
+        $packet = fgets($this->_handle, 4096);
+        $buffer[] = $packet;
+        if (!is_null($data) && strstr($packet,$data))
+          break;
+      }
 
     } catch (Exception $e){
       $this->_lastError = $e->getMessage();
