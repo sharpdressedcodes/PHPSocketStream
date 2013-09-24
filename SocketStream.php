@@ -1,13 +1,12 @@
 <?php
 
-/*
-
-  Socket Stream Wrapper
-  by Greg Kappatos
-  24th September, 2013
-
-*/
-
+ /*
+  *
+  * Socket Stream Wrapper
+  * by Greg Kappatos
+  * 24th September, 2013
+  *
+  */
 
 class SocketStream {
 
@@ -98,7 +97,7 @@ class SocketStream {
 
   }
 
-  public function receive($data=null){
+  public function receive($data = null){
 
     $this->_lastError = null;
 
